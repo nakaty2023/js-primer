@@ -1,0 +1,10 @@
+services:
+  app:
+    image: node:22.7.0-slim
+    container_name: node_app
+    working_dir: /usr/src/app
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "3000:3000"
+    tty: true
