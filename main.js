@@ -1,12 +1,13 @@
 import * as util from "node:util";
+import * as fs from "node:fs/promises";
 
-// コマンドライン引数をparseArgs関数でパースする
-const {
-    positionals
-} = util.parseArgs({
-    // オプションやフラグ以外の引数を渡すことを許可する
+const { positionals } = util.parseArgs({
     allowPositionals: true
 });
-// ファイルパスをpositionals配列から取り出す
 const filePath = positionals[0];
-console.log(filePath);
+fs.readFile(filePath, { encoding: "utf8" }).then(file => {
+    console.log(file);
+}).catch(err => {
+    console.error(err.message);
+    process.exit(1);
+});
